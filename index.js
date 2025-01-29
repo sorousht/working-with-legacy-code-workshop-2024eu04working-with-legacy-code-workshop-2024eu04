@@ -68,7 +68,28 @@ class EmployeeService {
     }
 }
 
+class InvitationGenerator {
+    constructor(template) {
+        this.template = template;
+    }
+
+    generate(employee) {
+        return this.template.replace('$firstName',employee.firstName)
+        .replace('$fullName',employee.firstName + ' ' + employee.lastName)
+    }
+
+}
+
 const menu = new Menu();
+
+const template = "$fullName\r\n" + 
+"----------\r\n" + 
+"Hello $firstName,\r\n\r\n" + 
+"Welcome to the XYZ group!" +
+"Please accept this invitation to SAP Jam group XYZ.\r\n\r\n" + 
+"Many thanks and best regards,\r\n" + 
+"Markus Peter";
+const invitationGenerator = new InvitationGenerator(template);
 
 do {
     menu.display();
@@ -84,22 +105,7 @@ do {
 
                 let data = FileManager.readFile(fileName);
                 let employees = EmployeeService.loadEmployees(data);
-                const template = "$fullName\r\n" + 
-                "----------\r\n" + 
-                "Hello $firstName,\r\n\r\n" + 
-                "Welcome to the XYZ group!" +
-                "Please accept this invitation to SAP Jam group XYZ.\r\n\r\n" + 
-                "Many thanks and best regards,\r\n" + 
-                "Markus Peter";
-                let invitations = '';
-                for(let employee of employees) {
-                    invitations += template
-                        .replace('$firstName',employee.firstName)
-                        .replace('$fullName',employee.firstName
-                                      + ' ' + employee.lastName)
-                        + '\r\n\r\n==============================\r\n\r\n';
-                }
-          
+                let invitations = employees.map(employee => invitationGenerator.generate(employee)).join('\r\n\r\n==============================\r\n\r\n');
                 FileManager.writeFile('EmployeeInvitations.txt', invitations);
 
             } catch (err) {
