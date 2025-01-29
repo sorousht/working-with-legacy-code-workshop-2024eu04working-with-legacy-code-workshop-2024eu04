@@ -50,10 +50,9 @@ class FileManager {
     }
 }
 
-
+const menu = new Menu();
 
 do {
-    const menu = new Menu();
     menu.display();
     const choice = menu.getChoice();
   
@@ -109,7 +108,7 @@ do {
         default:
             console.log('Please enter a number within the range listed above.');
     }
-} while(choice>0);
+} while(menu.choice>0);
 console.log();
 console.log('Goodbye!');
 
