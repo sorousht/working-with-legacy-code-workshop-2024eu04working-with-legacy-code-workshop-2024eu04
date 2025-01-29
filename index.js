@@ -7,8 +7,6 @@ managers = function() {
 memberList = function() {
 };
 
-var choice = 0;
-
 class Menu {
     constructor() {
         this.choice = 0;
@@ -50,6 +48,26 @@ class FileManager {
     }
 }
 
+class Employee {
+    constructor(firstName, lastName, managerFirstName, managerLastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.manager = {
+            firstName: managerFirstName,
+            lastName: managerLastName
+        };
+    }
+}
+
+class EmployeeService {
+    static loadEmployees(data) {
+        return data.map(line => {
+            const token = line.split(';');
+            return new Employee(token[0], token[1], token[2], token[3]);
+        });
+    }
+}
+
 const menu = new Menu();
 
 do {
@@ -65,17 +83,7 @@ do {
                 console.log('Reading employee list from ' + fs.realpathSync(fileName));
 
                 let data = FileManager.readFile(fileName);
-                let employees = [];
-                for(var line of data) {
-                    let token = line.split(';');
-                    let employee = {
-                        employee: { firstName: token[0],
-                                    lastName: token[1] },
-                        manager: { firstName: (token.length === 4 ? token[2] : '' ),
-                                   lastName: (token.length === 4 ? token[3] : '') }
-                    }
-                    employees.push(employee);
-                }
+                let employees = EmployeeService.loadEmployees(data);
                 const template = "$fullName\r\n" + 
                 "----------\r\n" + 
                 "Hello $firstName,\r\n\r\n" + 
@@ -86,9 +94,9 @@ do {
                 let invitations = '';
                 for(let employee of employees) {
                     invitations += template
-                        .replace('$firstName',employee.employee.firstName)
-                        .replace('$fullName',employee.employee.firstName
-                                      + ' ' + employee.employee.lastName)
+                        .replace('$firstName',employee.firstName)
+                        .replace('$fullName',employee.firstName
+                                      + ' ' + employee.lastName)
                         + '\r\n\r\n==============================\r\n\r\n';
                 }
           
