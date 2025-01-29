@@ -15,9 +15,14 @@ class Menu {
         console.log(); 
     }
 
-    getChoice() {
+    getInput() {
         this.choice = getInput.question('Enter your choice: ');
-        return this.choice;
+        const folderName = getInput.question('Enter the name of folder with the data: ');
+        const fileName = folderName + '/employees.csv';
+        return {
+            choice: this.choice,
+            dataSource: fileName
+        };
     }
 }
 module.exports = Menu;

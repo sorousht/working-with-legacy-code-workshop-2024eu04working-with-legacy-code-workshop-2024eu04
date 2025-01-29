@@ -1,5 +1,3 @@
-const getInput = require('readline-sync');
-const fs = require('fs');
 const Menu = require('./Menu');
 const FileManager = require('./FileManager');
 const EmployeeService = require('./EmployeeService');
@@ -24,16 +22,12 @@ const invitationGenerator = new InvitationGenerator(template);
 
 do {
     menu.display();
-    const choice = menu.getChoice();
+    const input = menu.getInput();
   
-    switch(choice) {
+    switch(input.choice) {
         case '0': break;
         case '1': 
-            const folderName = getInput.question('Enter the name of folder with the data: ');
-            const fileName = folderName + '/employees.csv';
-            console.log('Reading employee list from ' + fs.realpathSync(fileName));
-            const data = FileManager.readFile(fileName);
-            const employees = EmployeeService.loadEmployees(data);
+            const employees = EmployeeService.loadEmployees(input.dataSource);
             const invitations = employees.map(employee => invitationGenerator.generate(employee)).join('\r\n\r\n==============================\r\n\r\n');
             FileManager.writeFile('EmployeeInvitations.txt', invitations);
 
