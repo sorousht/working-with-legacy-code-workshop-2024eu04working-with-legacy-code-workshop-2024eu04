@@ -9,17 +9,54 @@ memberList = function() {
 
 var choice = 0;
 
+class Menu {
+    constructor() {
+        this.choice = 0;
+    }
+    display() {
+        console.log('');
+        console.log('   Jam Invitation and Page Generator');
+        console.log('   ---------------------------------');
+        console.log();
+        console.log('0. Exit');
+        console.log('1. Create aJam Invitations For Employees & Jam Group XYZ');
+        console.log('2. Create Jam Invitations For Managers & Jam Group XYZ');
+        console.log('3. Create Member Overview Page');
+        console.log(); 
+    }
+
+    getChoice() {
+        this.choice = getInput.question('Enter your choice: ');
+        return this.choice;
+    }
+}
+
+class FileManager {
+    static readFile(filePath) {
+        try {
+            return fs.readFileSync(filePath, 'utf-8').split('\n');
+        } catch (err) {
+            console.log(`Could not load ${filePath}: ${err}`);
+            return [];
+        }
+    }
+
+    static writeFile(filePath, data) {
+        try {
+            return fs.writeFileSync(filePath, data, 'utf-8');
+        } catch (writeErr) {
+            console.log(`Could not write ${filePath} ${writeErr}`);
+        }
+    }
+}
+
+
+
 do {
-    console.log('');
-    console.log('   Jam Invitation and Page Generator');
-    console.log('   ---------------------------------');
-    console.log();
-    console.log('0. Exit');
-    console.log('1. Create Jam Invitations For Employees & Jam Group XYZ');
-    console.log('2. Create Jam Invitations For Managers & Jam Group XYZ');
-    console.log('3. Create Member Overview Page');
-    console.log();
-    choice = getInput.question('Enter your choice: ');
+    const menu = new Menu();
+    menu.display();
+    const choice = menu.getChoice();
+  
     switch(choice) {
         case '0': break;
         case '1': 
@@ -27,7 +64,8 @@ do {
             const fileName = folderName + '/employees.csv';
             try {
                 console.log('Reading employee list from ' + fs.realpathSync(fileName));
-                const data = fs.readFileSync(fileName,'utf-8').split('\n');
+
+                let data = FileManager.readFile(fileName);
                 let employees = [];
                 for(var line of data) {
                     let token = line.split(';');
@@ -54,12 +92,11 @@ do {
                                       + ' ' + employee.employee.lastName)
                         + '\r\n\r\n==============================\r\n\r\n';
                 }
-                try {
-                    fs.writeFileSync('EmployeeInvitations.txt',invitations, 'utf-8');
-                } catch (writeErr) {
-                    console.log(`Could not write EmployeeInvitations.txt: ${writeErr}`);
-                }
+          
+                FileManager.writeFile('EmployeeInvitations.txt', invitations);
+
             } catch (err) {
+                
                 console.log(`Could not load employee.csv: ${err}`);
             }
             break;
