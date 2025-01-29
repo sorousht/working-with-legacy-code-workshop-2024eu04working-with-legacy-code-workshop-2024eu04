@@ -1,84 +1,15 @@
 const getInput = require('readline-sync');
 const fs = require('fs');
+const Menu = require('./Menu');
+const FileManager = require('./FileManager');
+const EmployeeService = require('./EmployeeService');
+const InvitationGenerator = require('./InvitationGenerator');
 
 managers = function() {
 };
 
 memberList = function() {
 };
-
-class Menu {
-    constructor() {
-        this.choice = 0;
-    }
-    display() {
-        console.log('');
-        console.log('   Jam Invitation and Page Generator');
-        console.log('   ---------------------------------');
-        console.log();
-        console.log('0. Exit');
-        console.log('1. Create aJam Invitations For Employees & Jam Group XYZ');
-        console.log('2. Create Jam Invitations For Managers & Jam Group XYZ');
-        console.log('3. Create Member Overview Page');
-        console.log(); 
-    }
-
-    getChoice() {
-        this.choice = getInput.question('Enter your choice: ');
-        return this.choice;
-    }
-}
-
-class FileManager {
-    static readFile(filePath) {
-        try {
-            return fs.readFileSync(filePath, 'utf-8').split('\n');
-        } catch (err) {
-            console.log(`Could not load ${filePath}: ${err}`);
-            return [];
-        }
-    }
-
-    static writeFile(filePath, data) {
-        try {
-            return fs.writeFileSync(filePath, data, 'utf-8');
-        } catch (writeErr) {
-            console.log(`Could not write ${filePath} ${writeErr}`);
-        }
-    }
-}
-
-class Employee {
-    constructor(firstName, lastName, managerFirstName, managerLastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.manager = {
-            firstName: managerFirstName,
-            lastName: managerLastName
-        };
-    }
-}
-
-class EmployeeService {
-    static loadEmployees(data) {
-        return data.map(line => {
-            const token = line.split(';');
-            return new Employee(token[0], token[1], token[2], token[3]);
-        });
-    }
-}
-
-class InvitationGenerator {
-    constructor(template) {
-        this.template = template;
-    }
-
-    generate(employee) {
-        return this.template.replace('$firstName',employee.firstName)
-        .replace('$fullName',employee.firstName + ' ' + employee.lastName)
-    }
-
-}
 
 const menu = new Menu();
 
@@ -100,18 +31,12 @@ do {
         case '1': 
             const folderName = getInput.question('Enter the name of folder with the data: ');
             const fileName = folderName + '/employees.csv';
-            try {
-                console.log('Reading employee list from ' + fs.realpathSync(fileName));
+            console.log('Reading employee list from ' + fs.realpathSync(fileName));
+            const data = FileManager.readFile(fileName);
+            const employees = EmployeeService.loadEmployees(data);
+            const invitations = employees.map(employee => invitationGenerator.generate(employee)).join('\r\n\r\n==============================\r\n\r\n');
+            FileManager.writeFile('EmployeeInvitations.txt', invitations);
 
-                let data = FileManager.readFile(fileName);
-                let employees = EmployeeService.loadEmployees(data);
-                let invitations = employees.map(employee => invitationGenerator.generate(employee)).join('\r\n\r\n==============================\r\n\r\n');
-                FileManager.writeFile('EmployeeInvitations.txt', invitations);
-
-            } catch (err) {
-                
-                console.log(`Could not load employee.csv: ${err}`);
-            }
             break;
         case '2':
             managers();
