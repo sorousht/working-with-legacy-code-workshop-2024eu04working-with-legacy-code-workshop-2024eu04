@@ -4,10 +4,15 @@
   "description": "Sample application for the Software Development Best Practices course",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "author": "Markus Peter",
   "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sqlite3": "^5.1.7"
+  },
   "dependencies": {
     "fs": "0.0.1-security",
     "readline-sync": "^1.4.10"

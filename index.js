@@ -1,6 +1,7 @@
 const Menu = require('./Menu');
 const FileManager = require('./FileManager');
-const EmployeeService = require('./EmployeeService');
+// const EmployeeFileService = require('./EmployeeFileService');
+const EmployeeDatabaseService = require('./EmployeeDatabaseService');
 const InvitationGenerator = require('./InvitationGenerator');
 const { TEMPLATE } = require("./constants");
 
@@ -14,16 +15,15 @@ const menu = new Menu();
 
 const invitationGenerator = new InvitationGenerator(TEMPLATE);
 
-do {
+// do {
     menu.display();
     const input = menu.getInput();
-  
     switch(input.choice) {
         case '0': break;
         case '1': 
-            const employees = EmployeeService.loadEmployees(input.dataSource);
-            FileManager.writeFile('EmployeeInvitations.txt', invitationGenerator.generate(employees));
-
+            EmployeeDatabaseService.loadEmployees().then(employees => {
+                FileManager.writeFile('EmployeeInvitations.txt', invitationGenerator.generate(employees));
+            });
             break;
         case '2':
             managers();
@@ -34,6 +34,6 @@ do {
         default:
             console.log('Please enter a number within the range listed above.');
     }
-} while(menu.choice>0);
+// } while(menu.choice>0);
 console.log();
 console.log('Goodbye!');

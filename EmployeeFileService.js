@@ -1,14 +1,16 @@
 const Employee = require('./Employee');
 const FileManager = require('./FileManager');
 const fs = require('fs');
-class EmployeeService {
+
+class EmployeeFileService {
     static loadEmployees(dataSource) {
         console.log('Reading employee list from ' + fs.realpathSync(dataSource));
         const data = FileManager.readFile(dataSource);
         return data.map(line => {
             const token = line.split(';');
             return new Employee(token[0], token[1], token[2], token[3]);
-        });
+        }).shift();
     }
 }
-module.exports = EmployeeService;
+
+module.exports = EmployeeFileService;
