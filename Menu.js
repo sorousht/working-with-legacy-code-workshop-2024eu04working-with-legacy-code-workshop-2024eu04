@@ -1,18 +1,11 @@
 const getInput = require('readline-sync');
+const { DISPLAY } = require('./constants');
 class Menu {
     constructor() {
         this.choice = 0;
     }
     display() {
-        console.log('');
-        console.log('   Jam Invitation and Page Generator');
-        console.log('   ---------------------------------');
-        console.log();
-        console.log('0. Exit');
-        console.log('1. Create aJam Invitations For Employees & Jam Group XYZ');
-        console.log('2. Create Jam Invitations For Managers & Jam Group XYZ');
-        console.log('3. Create Member Overview Page');
-        console.log(); 
+        console.log(DISPLAY)
     }
 
     getInput() {

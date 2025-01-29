@@ -2,6 +2,7 @@ const Menu = require('./Menu');
 const FileManager = require('./FileManager');
 const EmployeeService = require('./EmployeeService');
 const InvitationGenerator = require('./InvitationGenerator');
+const { TEMPLATE } = require("./constants");
 
 managers = function() {
 };
@@ -11,14 +12,7 @@ memberList = function() {
 
 const menu = new Menu();
 
-const template = "$fullName\r\n" + 
-"----------\r\n" + 
-"Hello $firstName,\r\n\r\n" + 
-"Welcome to the XYZ group!" +
-"Please accept this invitation to SAP Jam group XYZ.\r\n\r\n" + 
-"Many thanks and best regards,\r\n" + 
-"Markus Peter";
-const invitationGenerator = new InvitationGenerator(template);
+const invitationGenerator = new InvitationGenerator(TEMPLATE);
 
 do {
     menu.display();
@@ -28,8 +22,7 @@ do {
         case '0': break;
         case '1': 
             const employees = EmployeeService.loadEmployees(input.dataSource);
-            const invitations = employees.map(employee => invitationGenerator.generate(employee)).join('\r\n\r\n==============================\r\n\r\n');
-            FileManager.writeFile('EmployeeInvitations.txt', invitations);
+            FileManager.writeFile('EmployeeInvitations.txt', invitationGenerator.generate(employees));
 
             break;
         case '2':
@@ -44,5 +37,3 @@ do {
 } while(menu.choice>0);
 console.log();
 console.log('Goodbye!');
-
-
