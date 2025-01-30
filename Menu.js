@@ -1,5 +1,6 @@
 const getInput = require('readline-sync');
 const { MAIN_MENU } = require('./constants');
+
 class Menu {
     constructor() {
         this.choice = 0;

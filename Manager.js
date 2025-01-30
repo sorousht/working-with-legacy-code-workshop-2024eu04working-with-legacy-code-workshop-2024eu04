@@ -1,4 +1,3 @@
-
 class Manager {
     constructor(firstName, lastName) {
         this.firstName = firstName;

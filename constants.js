@@ -6,8 +6,6 @@ const INVITATION_TEMPLATE = "$fullName\r\n" +
 "Many thanks and best regards,\r\n" + 
 "Markus Peter";
 
-
-
 const MAIN_MENU = "\r\n" +
 "  Jam Invitation and Page Generator\r\n" +
 "  --------------------------------- \r\n" +

@@ -1,4 +1,3 @@
-
 const Manager = require('./Manager');
 
 class Employee {
