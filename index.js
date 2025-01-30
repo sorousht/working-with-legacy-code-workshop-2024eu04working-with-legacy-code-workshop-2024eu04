@@ -50,17 +50,17 @@ class Application {
     async employeesCSV() {
         const dataSource = this.menu.filePathQuestion();
         const employees = this.employeeFileService.loadEmployees(dataSource);
-        this.fileManager.writeFile('EmployeeInvitations.txt', this.invitationGenerator.generate(employees));
+        this.fileManager.writeFile(constants.EMPLOYEE_INVITELIST_NAME, this.invitationGenerator.generate(employees));
     }
 
     async employeesDatabase() {
         const employees = await this.employeeDatabaseService.loadEmployees();
-        this.fileManager.writeFile('EmployeeInvitations.txt', this.invitationGenerator.generate(employees));
+        this.fileManager.writeFile(constants.EMPLOYEE_INVITELIST_NAME, this.invitationGenerator.generate(employees));
     }
 
     async managers() {
         const managers = await this.managerDatabaseService.loadManagers();
-        this.fileManager.writeFile('ManagerInvitations.txt', this.invitationGenerator.generate(managers));
+        this.fileManager.writeFile(constants.MANAGER_INVITELIST_NAME, this.invitationGenerator.generate(managers));
     }
 
     memberList() {
@@ -69,7 +69,7 @@ class Application {
 }
 
 const menu = new Menu();
-const invitationGenerator = new InvitationGenerator(constants.INVITATION_TEMPLATE);
+const invitationGenerator = new InvitationGenerator();
 const fileManager = new FileManager();
 const employeeFileService = new EmployeeFileService();
 const employeeDatabaseService = new EmployeeDatabaseService();
