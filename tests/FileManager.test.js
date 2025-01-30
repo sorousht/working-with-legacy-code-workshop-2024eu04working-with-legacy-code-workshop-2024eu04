@@ -10,7 +10,8 @@ describe('FileManager', () => {
             const fileContent = 'line1\nline2\nline3';
             fs.readFileSync.mockReturnValue(fileContent);
 
-            const result = FileManager.readFile(filePath);
+            const fileManager = new FileManager();
+            const result = fileManager.readFile(filePath);
 
             expect(fs.readFileSync).toHaveBeenCalledWith(filePath, 'utf-8');
             expect(result).toEqual(['line1', 'line2', 'line3']);
@@ -22,7 +23,8 @@ describe('FileManager', () => {
                 throw new Error('File not found');
             });
 
-            const result = FileManager.readFile(filePath);
+            const fileManager = new FileManager();
+            const result = fileManager.readFile(filePath);
 
             expect(fs.readFileSync).toHaveBeenCalledWith(filePath, 'utf-8');
             expect(result).toEqual([]);
@@ -34,7 +36,8 @@ describe('FileManager', () => {
             const filePath = 'test.txt';
             const data = 'some data';
 
-            FileManager.writeFile(filePath, data);
+            const fileManager = new FileManager();
+            fileManager.writeFile(filePath, data);
 
             expect(fs.writeFileSync).toHaveBeenCalledWith(filePath, data, 'utf-8');
         });
@@ -47,7 +50,8 @@ describe('FileManager', () => {
                 throw new Error('Write error');
             });
 
-            FileManager.writeFile(filePath, data);
+            const fileManager = new FileManager();
+            fileManager.writeFile(filePath, data);
 
             expect(fs.writeFileSync).toHaveBeenCalledWith(filePath, data, 'utf-8');
             expect(consoleSpy).toHaveBeenCalledWith(`Could not write ${filePath} Error: Write error`);
