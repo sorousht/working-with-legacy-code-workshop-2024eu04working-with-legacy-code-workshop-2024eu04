@@ -4,9 +4,9 @@ class InvitationGenerator {
         this.template = template;
     }
 
-    generate(employees) {
-        return employees.map(employee => this.template.replace('$firstName',employee.firstName)
-        .replace('$fullName',employee.firstName + ' ' + employee.lastName)).join('\r\n\r\n==============================\r\n\r\n');
+    generate(participants) {
+        return participants.map(participant => this.template.replace('$firstName',participant.firstName)
+        .replace('$fullName',participant.firstName + ' ' + participant.lastName)).join('\r\n\r\n==============================\r\n\r\n');
     }
 
 }
