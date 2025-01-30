@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('employees.db');
 
 class EmployeeDatabaseService {
-    static loadEmployees() {
+    loadEmployees() {
         console.log('Reading employee list from database');
         const sql = "SELECT employees.first_name as employee_first_name, employees.last_name as employee_last_name, managers.first_name as manager_first_name, managers.last_name as manager_last_name FROM employees JOIN managers ON employees.manager_id = managers.id"
         return new Promise((resolve, reject) => {

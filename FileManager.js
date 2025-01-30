@@ -1,6 +1,6 @@
 const fs = require('fs');
 class FileManager {
-    static readFile(filePath) {
+    readFile(filePath) {
         try {
             return fs.readFileSync(filePath, 'utf-8').split('\n');
         } catch (err) {
@@ -9,7 +9,7 @@ class FileManager {
         }
     }
 
-    static writeFile(filePath, data) {
+    writeFile(filePath, data) {
         try {
             return fs.writeFileSync(filePath, data, 'utf-8');
         } catch (writeErr) {
