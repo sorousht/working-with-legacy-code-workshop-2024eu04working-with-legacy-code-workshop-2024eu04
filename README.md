@@ -6,12 +6,13 @@
    3. Interface Segregation - We introduced multiple services to read from file and database following the same contract 
   
   
-Be as precise as possible. If you address a violation of "S", for example, describe all the different responsibilities you see mixed. o Which of the techniques described on GitHub page Code Level Patterns for Test Isolation in Legacy Code (or in the literature) did you apply?
+2. Which of the techniques described on GitHub page Code Level Patterns for Test Isolation in Legacy Code (or in the literature) did you apply?
+   1. Keep the constructor as minimal as possible
 
-1. Which steps precisely did you perform to improve the legacy code and make sure that it still works as before? You don't have to be able to repeat the steps live, or screen-record and replay them. But you may want to take snapshots of intermediate stages of the code while you perform the refactoring.
+3. Which steps precisely did you perform to improve the legacy code and make sure that it still works as before? You don't have to be able to repeat the steps live, or screen-record and replay them. But you may want to take snapshots of intermediate stages of the code while you perform the refactoring.
    1. We ran the program every time with introducing new changes and refactoring, made sure that we get the expected results. Along the way, we introduced unit tests for the newly extracted modules. Those unit tests gave us more confidence with refactoring.  
 
-2. Where and how does your resulting code better adhere to the Clean Code principles? Be as precise as possible again. If you addressed a violation of "S", for example, describe where the different responsibilities are now taken care of separately.
+4. Where and how does your resulting code better adhere to the Clean Code principles? Be as precise as possible again. If you addressed a violation of "S", for example, describe where the different responsibilities are now taken care of separately.
    1. The constants file follows the Open-closed principle
    2. Better naming
    3. OOP style
@@ -46,3 +47,5 @@ Invitation generator is a flexible class that receives the template from outside
 Next step is extracting the classes into individual files.
 
 There are some constants and templates which we attempted to extract and place in a constant file as a configuration for the application.
+
+We introduced a sqlite database with a dedicated service
