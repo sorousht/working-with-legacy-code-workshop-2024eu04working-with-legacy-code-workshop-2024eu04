@@ -4,18 +4,19 @@ class Menu {
     constructor() {
         this.choice = 0;
     }
+
     display() {
         console.log(DISPLAY)
     }
 
-    getInput() {
+    mainMenuQuestion() {
         this.choice = getInput.question('Enter your choice: ');
+        return this.choice;
+    }
+
+    filePathQuestion() {
         const folderName = getInput.question('Enter the name of folder with the data: ');
-        const fileName = folderName + '/employees.csv';
-        return {
-            choice: this.choice,
-            dataSource: fileName
-        };
+        return folderName + '/employees.csv';
     }
 }
 module.exports = Menu;
