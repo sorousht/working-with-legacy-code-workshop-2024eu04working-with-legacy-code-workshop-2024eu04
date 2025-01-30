@@ -1,4 +1,4 @@
-const Manager = require('./Manager');
+const Manager = require('./manager');
 
 class Employee {
     constructor(firstName, lastName, managerFirstName, managerLastName) {

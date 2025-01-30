@@ -1,4 +1,4 @@
-const Manager = require('./Manager');
+const Manager = require('./manager');
 const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 

@@ -1,5 +1,5 @@
 const getInput = require('readline-sync');
-const Menu = require('../Menu');
+const Menu = require('../menu');
 const { MAIN_MENU } = require("../constants");
 jest.mock('readline-sync');
 

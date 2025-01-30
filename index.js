@@ -1,9 +1,9 @@
-const Menu = require('./Menu');
-const FileManager = require('./FileManager');
-const EmployeeFileService = require('./EmployeeFileService');
-const EmployeeDatabaseService = require('./EmployeeDatabaseService');
-const ManagerDatabaseService = require('./ManagerDatabaseService');
-const InvitationGenerator = require('./InvitationGenerator');
+const Menu = require('./menu');
+const FileManager = require('./fileManager');
+const EmployeeFileService = require('./employeeFileService');
+const EmployeeDatabaseService = require('./employeeDatabaseService');
+const ManagerDatabaseService = require('./managerDatabaseService');
+const InvitationGenerator = require('./invitationGenerator');
 const constants = require("./constants");
 
 class Application {

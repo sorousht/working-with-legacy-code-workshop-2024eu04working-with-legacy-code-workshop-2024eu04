@@ -1,9 +1,9 @@
-const EmployeeFileService = require('../EmployeeFileService');
-const Employee = require('../Employee');
-const FileManager = require('../FileManager');
+const EmployeeFileService = require('../employeeFileService');
+const Employee = require('../employee');
+const FileManager = require('../fileManager');
 const fs = require('fs');
 
-jest.mock('../FileManager');
+jest.mock('../fileManager');
 jest.mock('fs');
 
 describe('EmployeeFileService', () => {

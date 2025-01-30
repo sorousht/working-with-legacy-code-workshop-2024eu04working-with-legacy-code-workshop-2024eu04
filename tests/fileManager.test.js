@@ -1,5 +1,5 @@
 const fs = require('fs');
-const FileManager = require('../FileManager');
+const FileManager = require('../fileManager');
 
 jest.mock('fs');
 

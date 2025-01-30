@@ -1,4 +1,0 @@
-## Thought process
-
-## Results
-

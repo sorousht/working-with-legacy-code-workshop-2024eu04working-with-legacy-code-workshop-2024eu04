@@ -1,5 +1,5 @@
-const Employee = require('./Employee');
-const FileManager = require('./FileManager');
+const Employee = require('./employee');
+const FileManager = require('./fileManager');
 const fs = require('fs');
 
 class EmployeeFileService {
