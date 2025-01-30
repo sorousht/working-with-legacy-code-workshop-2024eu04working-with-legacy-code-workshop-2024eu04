@@ -4,7 +4,7 @@ const EmployeeFileService = require('./EmployeeFileService');
 const EmployeeDatabaseService = require('./EmployeeDatabaseService');
 const ManagerDatabaseService = require('./ManagerDatabaseService');
 const InvitationGenerator = require('./InvitationGenerator');
-const { INVITATION_TEMPLATE } = require("./constants");
+const constants = require("./constants");
 
 class Application {
     constructor(menu, invitationGenerator, fileManager, employeeFileService, employeeDatabaseService, managerDatabaseService) {
@@ -29,17 +29,17 @@ class Application {
 
     async handleMenuChoice(choice) {
         switch (choice) {
-            case '0': break;
-            case '1':
+            case constants.EXIT: break;
+            case constants.GENERATOR_EMPLOYEE_CSV:
                 await this.employeesCSV();
                 break;
-            case '2': 
+            case constants.GENERATOR_EMPLOYEE_DB: 
                 await this.employeesDatabase();
                 break;      
-            case '3':
+            case constants.GENERATOR_MANAGER:
                 await this.managers();
                 break;
-            case '4':
+            case constants.GENERATOR_OVERVIEW_PAGE:
                 this.memberList();
                 break;
             default:
@@ -69,7 +69,7 @@ class Application {
 }
 
 const menu = new Menu();
-const invitationGenerator = new InvitationGenerator(INVITATION_TEMPLATE);
+const invitationGenerator = new InvitationGenerator(constants.INVITATION_TEMPLATE);
 const fileManager = new FileManager();
 const employeeFileService = new EmployeeFileService();
 const employeeDatabaseService = new EmployeeDatabaseService();
