@@ -8,14 +8,13 @@ const db = new sqlite3.Database('employees.db');
 class EmployeeDatabaseService {
     static loadEmployees() {
         console.log('Reading employee list from database');
+        const sql = "SELECT employees.first_name as employee_first_name, employees.last_name as employee_last_name, managers.first_name as manager_first_name, managers.last_name as manager_last_name FROM employees JOIN managers ON employees.manager_id = managers.id"
         return new Promise((resolve, reject) => {
-            db.all('SELECT * FROM employees JOIN managers ON employees.manager_id = managers.id', (err, rows) => {
-                 
+            db.all(sql, (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
-                    console.log(rows);
-                    const employees = rows.map(row => new Employee(row.first_name, row.last_name));
+                    const employees = rows.map(row => new Employee(row.employee_first_name, row.employee_last_name, row.manager_first_name, row.manager_last_name));
                     resolve(employees);
                 }
             });
