@@ -1,7 +1,5 @@
-class Manager {
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+const Person = require('./person');
+
+class Manager extends Person {
 }
 module.exports = Manager;

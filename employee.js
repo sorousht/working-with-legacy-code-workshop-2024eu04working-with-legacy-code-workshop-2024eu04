@@ -1,10 +1,10 @@
 const Manager = require('./manager');
+const Person = require('./person');
 
-class Employee {
+class Employee extends Person {
     constructor(firstName, lastName, managerFirstName, managerLastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.manager = new Manager(managerFirstName, managerLastName)
+        super(firstName, lastName);
+        this.manager = new Manager(managerFirstName, managerLastName);
     }
 }
 module.exports = Employee;
