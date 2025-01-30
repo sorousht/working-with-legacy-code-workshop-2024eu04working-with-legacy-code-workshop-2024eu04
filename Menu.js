@@ -6,8 +6,8 @@ class Menu {
         this.choice = 0;
     }
 
-    display() {
-        console.log(MAIN_MENU)
+    display(template = MAIN_MENU) {
+        console.log(template)
     }
 
     mainMenuQuestion() {
