@@ -1,4 +1,4 @@
-const TEMPLATE = "$fullName\r\n" + 
+const INVITATION_TEMPLATE = "$fullName\r\n" + 
 "----------\r\n" + 
 "Hello $firstName,\r\n\r\n" + 
 "Welcome to the XYZ group!" +
@@ -8,7 +8,7 @@ const TEMPLATE = "$fullName\r\n" +
 
 
 
-const DISPLAY = "\r\n" +
+const MAIN_MENU = "\r\n" +
 "  Jam Invitation and Page Generator\r\n" +
 "  --------------------------------- \r\n" +
 "0. Exit\r\n" +
@@ -18,6 +18,6 @@ const DISPLAY = "\r\n" +
 "4. Create Member Overview Page \r\n";
 
 module.exports = {
-    TEMPLATE,
-    DISPLAY
+    INVITATION_TEMPLATE,
+    MAIN_MENU
 };
